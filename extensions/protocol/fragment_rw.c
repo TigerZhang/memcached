@@ -124,6 +124,8 @@ static ENGINE_ERROR_CODE handle_fragment_rw(EXTENSION_BINARY_PROTOCOL_DESCRIPTOR
                     return ENGINE_DISCONNECT;
                 }
             } else {
+                // TODO: set exptime by parsing the request packet
+                item_info.exptime = 0;
                 r = create_object(v1, handle, cookie, &item_info,
                                   vbucket, data, offset, len, &cas);
                 if (r == ENGINE_SUCCESS) {
