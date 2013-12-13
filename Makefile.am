@@ -79,7 +79,7 @@ timedrun_SOURCES = programs/timedrun.c
 
 # A collection of functions used by the various modules in memcached
 libmemcached_utilities_la_CPPFLAGS = $(CPPFLAGS) -I$(top_srcdir)/utilities
-libmemcached_utilities_la_LDFLAGS =-R '$(pkglibdir)' -R '$(libdir)'
+libmemcached_utilities_la_LDFLAGS =-R '$(pkglibdir)' -R '$(libdir)' -ldl
 libmemcached_utilities_la_SOURCES= \
                         include/memcached/config_parser.h \
                         include/memcached/util.h \

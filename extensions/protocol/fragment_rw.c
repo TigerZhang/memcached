@@ -57,7 +57,7 @@ static ENGINE_ERROR_CODE create_object(ENGINE_HANDLE_V1 *v1,
     item *item = NULL;
 
     r = v1->allocate(v, cookie, &item, org->key, org->nkey, org->nbytes,
-                     org->flags, vbucket);
+                     org->flags, org->exptime);
     if (r != ENGINE_SUCCESS) {
         return r;
     }
@@ -105,7 +105,7 @@ static ENGINE_ERROR_CODE handle_fragment_rw(EXTENSION_BINARY_PROTOCOL_DESCRIPTOR
     if (r == ENGINE_SUCCESS) {
         item_info item_info = { .nvalue = 1 };
 
-        if (!v1->get_item_info(handle, NULL, item, &item_info)) {
+        if (!v1->get_item_info(handle, cookie, item, &item_info)) {
             r = ENGINE_FAILED;
         } else if (cas != 0 && item_info.cas != cas) {
             r = ENGINE_KEY_EEXISTS;
